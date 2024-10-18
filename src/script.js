@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Inicializamos el contexto de audio al presionar el botón "Iniciar"
     const startAudio = async () => {
+        document.getElementById('silence-audio').play();
+
         // Cargar el buffer al cargar la página
         await loadAudioBuffer();
 
