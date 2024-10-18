@@ -1,19 +1,43 @@
-*
-{
-    margin: 0;
-    padding: 0;
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
 }
 
-html,
-body
-{
-    overflow: hidden;
+.container {
+  text-align: center;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+#startButton {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #39245B;
+  color: #FFF;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#grainSizeFader {
+  width: 300px;
+  margin: 20px auto;
+  appearance: none;
+  background-color: #505050;
+  height: 10px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+#grainSizeFader::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  cursor: pointer;
 }

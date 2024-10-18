@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raycaster and Mouse Events</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Granular Synthesis Control</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <canvas class="webgl"></canvas>
-    <script type="module" src="./script.js"></script>
+    <div class="container">
+        <h1>Controla el Ancho de los Granos</h1>
+        <button id="startButton">Iniciar Experiencia</button>
+        <input type="range" id="grainSizeFader" min="0.01" max="0.25" step="0.001" value="0.1" style="display:none;">
+    </div>
+
+    <!-- Tone.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.0.4/Tone.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
