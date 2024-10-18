@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const grainSizeFader = document.getElementById('grainSizeFader');
     const startButton = document.getElementById('startButton');
     let grainPlayer;
@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicializamos el contexto de audio al presionar el botón "Iniciar"
     const startAudio = async () => {
+        // Cargar el buffer al cargar la página
+        await loadAudioBuffer();
+
         try {
             console.log('Intentando iniciar Tone.js...');
             await Tone.start(); // Asegura que Tone.js esté listo tras el gesto
@@ -48,21 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error iniciando el AudioContext:', error);
         }
+
+        // Control del tamaño del grano a través del fader
+        grainSizeFader.addEventListener('input', (e) => {
+            const grainSize = parseFloat(e.target.value);  // Obtener el valor del fader
+            if (grainPlayer) {
+                grainPlayer.grainSize = grainSize;  // Ajustar el tamaño del grano
+                console.log('Ancho del grano:', grainSize);
+                grainPlayer.playbackRate = grainSize * 10;  // Ajustar la velocidad de reproducción
+            }
+        });
     };
 
     // Solo usamos 'click' para asegurar la correcta inicialización en iOS
     startButton.addEventListener('click', startAudio);
-
-    // Cargar el buffer al cargar la página
-    loadAudioBuffer();
-
-    // Control del tamaño del grano a través del fader
-    grainSizeFader.addEventListener('input', (e) => {
-        const grainSize = parseFloat(e.target.value);  // Obtener el valor del fader
-        if (grainPlayer) {
-            grainPlayer.grainSize = grainSize;  // Ajustar el tamaño del grano
-            console.log('Ancho del grano:', grainSize);
-            grainPlayer.playbackRate = grainSize * 10;  // Ajustar la velocidad de reproducción
-        }
-    });
 });
