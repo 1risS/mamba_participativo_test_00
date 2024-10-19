@@ -19,17 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Inicializamos el contexto de audio al presionar el botón "Iniciar"
     const startAudio = async () => {
-<<<<<<< HEAD
         // Reproducir el audio silencioso
         silentAudio.play().then(async () => {
             console.log('Audio silencioso reproducido');
-=======
-        console.log("Reproducir audio de silencio para activar el contexto de audio en iOS...");
-        document.getElementById('silence-audio').play();
-
-        // Cargar el buffer al cargar la página
-        await loadAudioBuffer();
->>>>>>> b69247326a0924b76db0546b37568b5a16925f81
 
             // Cargar el buffer al cargar la página
             await loadAudioBuffer();
