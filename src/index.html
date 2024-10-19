@@ -10,9 +10,19 @@
 
 <body>
     <div class="container">
-        <h1>Controla el Ancho de los Granos</h1>
+        <h1>Controla el Ancho de los Granos y el Delay</h1>
         <button id="startButton">Iniciar Experiencia</button>
-        <input type="range" id="grainSizeFader" min="0.01" max="0.25" step="0.001" value="0.1" style="display:none;">
+
+        <!-- Fader horizontal para el tamaño de los granos -->
+        <input type="range" id="grainSizeFader" min="0.01" max="0.09" step="0.001" value="0.1" style="display:none;">
+
+        <!-- Fader vertical para controlar el "wet" del delay -->
+        <input type="range" id="wetFader" min="0.0" max="1.0" step="0.01" value="0.25" style="display:none;">
+
+        <!-- Audio element with silent mp3 -->
+        <audio id="silentAudio">
+            <source src="silent.mp3" type="audio/mp3">
+        </audio>
     </div>
 
     <!-- Tone.js -->

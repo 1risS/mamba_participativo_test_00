@@ -41,3 +41,23 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
+#wetFader {
+  width: 300px;
+  margin: 20px auto;
+  appearance: none;
+  background-color: #505050;
+  height: 10px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+#wetFader::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  cursor: pointer;
+}
