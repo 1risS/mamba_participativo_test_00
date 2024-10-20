@@ -17,15 +17,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const p5Sketch = (p) => {
-        let num = 1000;
+        let num = 1000;  // Cantidad original de partículas
         let vx = new Array(num);
         let vy = new Array(num);
         let x = new Array(num);
         let y = new Array(num);
         let ax = new Array(num);
         let ay = new Array(num);
-        let magnetism = 10.0;
-        let radius = 1;
+        let magnetism = 100.0;  // Fuerza de atracción original
+        let radius = 1;  // Radio de las partículas
         let gensoku = 0.95;
 
         p.setup = function () {
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         p.draw = function () {
-            drawGradientBackground(); // Dibujar el fondo con el degradado
+            drawGradientBackground();  // Dibujar el fondo con el degradado
 
-            let waveform = analyser.getValue();
+            let waveform = analyser.getValue();  // Obtener el análisis del audio
 
             for (let i = 0; i < num; i++) {
                 let targetX = isPressed ? p.mouseX : 0;
@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ay[i] = magnetism * (targetY - y[i]) / (distance * distance);
                 }
 
-                let audioMod = p.map(waveform[i % waveform.length], -1, 1, -5, 5);
+                // Modificar el movimiento de las partículas con base en el waveform (escuchan el audio)
+                let audioMod = p.map(waveform[i % waveform.length], -1, 1, -5, 5);  // Intensidad del audio
                 vx[i] += ax[i] + audioMod;
                 vy[i] += ay[i] + audioMod;
 
@@ -82,26 +83,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                 x[i] += vx[i];
                 y[i] += vy[i];
 
-                // Cambiar el color según la posición Y y agregar glow
+                // Cambiar el color según la posición Y, sin glow y sin llegar a blanco
                 let proximityToBlack = p.map(y[i], 0, p.height, 0, 1);
-                let particleColor = p.lerpColor(p.color(255, 0, 0), p.color(255, 255, 255), proximityToBlack);
-                p.fill(particleColor);
+                let particleColor = p.lerpColor(p.color(255, 0, 0), p.color(50, 0, 0), proximityToBlack);
+                p.fill(particleColor, 150);  // Color rojo oscuro, sin efecto de glow
 
-                // Efecto glow
-                p.push();
-                p.drawingContext.shadowBlur = 20;
-                p.drawingContext.shadowColor = p.color(255, 0, 0);  // Color del glow
-                p.ellipse(x[i], y[i], radius + proximityToBlack * 5, radius + proximityToBlack * 5);  // Partícula con glow
-                p.pop();
+                // Dibujar la partícula sin efecto de glow
+                p.ellipse(x[i], y[i], radius + proximityToBlack * 3, radius + proximityToBlack * 3);
             }
 
-            let wetValue = mapValueLog(p.mouseX, 0, p.width, 0.01, 1);
-            let grainSize = p.map(p.mouseY, 0, p.height, 0.01, 0.09);
+            // Controlar el ancho de los granos con el eje X
+            let grainSize = p.map(p.mouseX, 0, p.width, 0.01, 0.09);
+            // Controlar el wet del delay con el eje Y
+            let wetValue = mapValueLog(p.mouseY, 0, p.height, 0.01, 1);
 
             if (pingPongDelay) pingPongDelay.wet.value = wetValue;
             if (grainPlayer) grainPlayer.grainSize = grainSize;
 
-            console.log('Wet:', wetValue, 'GrainSize:', grainSize);
+            console.log('GrainSize:', grainSize, 'Wet:', wetValue);
         };
 
         p.windowResized = function () {
