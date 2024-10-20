@@ -1,18 +1,25 @@
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
   background-color: #f0f0f0;
-}
-
-.container {
-  text-align: center;
+  -webkit-touch-callout: none; /* Safari */
+  -webkit-user-select: none; /* Chrome */     
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; 
 }
 
 #startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 15px 30px;
   font-size: 18px;
   background-color: #39245B;
@@ -20,44 +27,13 @@ body {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  z-index: 10; /* Aseguramos que el botón esté sobre el canvas */
 }
 
-#grainSizeFader {
-  width: 300px;
-  margin: 20px auto;
-  appearance: none;
-  background-color: #505050;
-  height: 10px;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
-
-#grainSizeFader::-webkit-slider-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: #FF0000;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#wetFader {
-  width: 300px;
-  margin: 20px auto;
-  appearance: none;
-  background-color: #505050;
-  height: 10px;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
-
-#wetFader::-webkit-slider-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: #FF0000;
-  border-radius: 50%;
-  cursor: pointer;
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* El canvas estará debajo del botón inicialmente */
 }
